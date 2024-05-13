@@ -11,11 +11,11 @@ el temporizador y los pines de entrada/salida del bluepill. Luego, se implementa
 ### Pines de entrada/salida
 Los pines de entrada/salida son controlados por el periférico GPIO conectado al bus periferico APB2 del micocontrolador. Los periféricos de los buses APB1 y APB2 CUENTAN CON UNA HABILITACIÓN DE RELOJ comandada por el periferico RCC (Reest and Clock Control), que permite controlar la frecuencia del reloj (oscilador a cristal). Para utilizarlo, debemos primero activar el reloj.
 
-( INSERTAR IMAGEN DEL MICRO. BUS Y ARQUITECTURA. INDICAR QUE EL PERIFERICO BUSCADO ESTA EN EL BUS APB2) Poner de donde se sacó
+![](Imagenes/PuertoAPB2_GPIOC.png)
 
 El micro tiene puertos de A hasta E, pero en la bluepill solo se puede acceder a los puertos A hasta C. Implementaremos primero las características estrictamente necesarias para completar el programa de parpadeo, por lo cual averiguamos el puerto y pin donde esta conectado el led integrado en la bluepill. En la siguiente imagen, se observa que eL LED esta em el PC13 (PIN 13 DEL PUERTO C) y es el que debemos configurar. 
 
-( INSERTAR IMAGEN DEL PINOUT DEL MICRO, INDICANDO EL PIN DEL LED) Poner de donde se sacó
+![](Imagenes/Bluepill-PC13.png)
 
 Según el manual de referncia de la familia del mcirocontrolador (RM0003, 2021, seccion 1.3.7) el reloj del puerto GPIOC se habilita poninendo en 1 el bit 4 (IOCEN) del registro de offset 0x18 (APB2ENR) en el periferico RCC, de direccion base 0x40021000 segun (hoja de datos STM32F103x, 2015).
 
@@ -59,5 +59,7 @@ typedef enum HPin{
 ```
 ### Referencias
 
+- <https://reversepcb.com/stm32f103c8t6/>
+- Hoja de datos STM32F103x (agosto 2015) ST.
 
 
