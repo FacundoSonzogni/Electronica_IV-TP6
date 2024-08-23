@@ -29,7 +29,7 @@ void Pin_cambiaEstado (HPin pin);
 
 void Temporizador_inicializa(void);
 uint32_t Temporizador_obtMilisegundos(void);
-void Temporizador_esperaMilis(uint32_t tiempo);
-void Temporizador_Handler(void);
+void Temporizador_esperaMilis(uint32_t espera);
+
 
 #endif
