@@ -2,9 +2,14 @@
 
 int main(void)
 {
-    /* Añade aquí el código de configuración */
-
-    /* Añade aquí el lazo principal */
+    Temporizador_inicializa();
+    Pin_configuraSalidaLenta(Pin_LED);
+    Pin_enAlto(Pin_LED);
+    for(;;)
+    {
+        Temporizador_esperaMilis(500);
+        Pin_cambiaEstado(Pin_LED);
+    }
 
     return 0;
 }

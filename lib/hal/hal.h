@@ -1,33 +1,35 @@
 #ifndef HAL_H
 #define HAL_H
+#include <stdbool.h>
+#include <stdint.h>
 
-/* Aquí inclusión de otros encabezados con definiciones necesarias */
+// DEFINICIONES DE TIPOS Y CONSTANTES:
 
-/* Aquí tus definiciones de tipo y constantes */
-
-typedef enum HPin{        //Handle 
+/**
+ * @brief Handle del Pin
+ * 
+ */
+typedef enum HPin{        
     Pin_LED, 
     PinPC13=Pin_LED, //Ambos tienen el mismo valor. Es solo para que se puedan usar los dos nombres
     Pin_NUM_HANDLES
 }HPin;
 
-/* Aquí tus prototipos de funciones */
+// PROTOTIPOS DE FUNCIONES:
 
-static void habilitarRelojPuertoC(void)  //Static significa que tiene vinculacion interna. No es visible fuera del archivo. 
-{  
-    RCC->APB2ENR = RCC->APB2ENR or RCC_APCB2ENR_IOPCEN; //Operacion de Máscara
-}
+/*Funciones para GPIO*/
 
-//Operaciones para pines
+void Pin_configuraSalidaLenta(HPin pin);   
+void Pin_enAlto (HPin pin);  
+void Pin_enBajo (HPin pin);  
+bool Pin_consultaEstado (HPin pin); 
+void Pin_cambiaEstado (HPin pin);  
 
-void Pin_ponModoSalida(HPin pin);   // Primer argumento: Puntero a estructura Ó un handle 
-                                    // Pone un pin en modod salida
+/*Funciones para el Temporizador Systick*/
 
-void Pin_ponSalida(HPin pin);  //Pone un pin en modo salida (Modo lento. Push-Pull)
-
-void Pin_ponEstadoBajo (HPin pin);  //Pone el estado del pin en estado bajo. Si el pin esta configurado como entrada
-                                    // el buffer de entrada esta desconectado
-
-void Pin_InvierteEstado (HPin pin); // Invierte el estado del pin. Lo pone en 1 si estaba en 0 y viceversa. 
+void Temporizador_inicializa(void);
+uint32_t Temporizador_obtMilisegundos(void);
+void Temporizador_esperaMilis(uint32_t tiempo);
+void Temporizador_Handler(void);
 
 #endif
